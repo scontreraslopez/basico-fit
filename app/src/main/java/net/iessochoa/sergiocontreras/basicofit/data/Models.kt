@@ -2,8 +2,6 @@ package net.iessochoa.sergiocontreras.basicofit.data
 
 import androidx.compose.runtime.mutableStateListOf
 
-data class Exercise(val id: String, val name: String)
-
 data class WorkSet(val exerciseId: String, val weightKg: Double, val reps: Int) {
     val volume: Double get() = weightKg * reps
 }
@@ -17,12 +15,6 @@ fun Double.formatKg(): String =
  * No hay ViewModel, no hay repositorio, no hay elevación: las pantallas se acoplan a este objeto.
  */
 object SessionStore {
-    val exercises = listOf(
-        Exercise("bench", "Press banca"),
-        Exercise("squat", "Sentadilla"),
-        Exercise("deadlift", "Peso muerto"),
-        Exercise("pullup", "Dominadas")
-    )
 
     val sets = mutableStateListOf<WorkSet>()
 

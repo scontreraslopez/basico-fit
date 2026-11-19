@@ -12,12 +12,16 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.iessochoa.sergiocontreras.basicofit.data.SessionStore
 import net.iessochoa.sergiocontreras.basicofit.data.formatKg
+import net.iessochoa.sergiocontreras.basicofit.ui.theme.BasicoFitTheme
 
 @Composable
-fun HomeScreen(onExerciseClick: (String) -> Unit) {
+fun HomeScreen(
+    onExerciseClick: (String) -> Unit
+) {
     Scaffold(
         bottomBar = {
             Surface(tonalElevation = 3.dp, modifier = Modifier.fillMaxWidth()) {
@@ -50,4 +54,12 @@ fun HomeScreen(onExerciseClick: (String) -> Unit) {
             }
         }
     }
+}
+
+@Preview(showBackground=true)
+@Composable
+fun HomeScreenPreview() = BasicoFitTheme() {
+    HomeScreen(
+        onExerciseClick = { }
+    )
 }

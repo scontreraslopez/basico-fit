@@ -19,13 +19,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.iessochoa.sergiocontreras.basicofit.data.SessionStore
 import net.iessochoa.sergiocontreras.basicofit.data.WorkSet
 import net.iessochoa.sergiocontreras.basicofit.data.formatKg
+import net.iessochoa.sergiocontreras.basicofit.ui.theme.BasicoFitTheme
 
 @Composable
-fun ExerciseScreen(exerciseId: String, onBack: () -> Unit) {
+fun ExerciseScreen(
+    exerciseId: String,
+    onBack: () -> Unit
+) {
     val exercise = SessionStore.exercises.first { it.id == exerciseId }
 
     // Estado del formulario dentro del propio composable (stateful).
@@ -99,4 +104,12 @@ fun ExerciseScreen(exerciseId: String, onBack: () -> Unit) {
             Text("Volver")
         }
     }
+}
+
+@Preview(showBackground=true)
+@Composable
+fun ExerciseScreenPreview() = BasicoFitTheme() {
+    ExerciseScreen(
+        exerciseId = "bench"
+    ) { }
 }
