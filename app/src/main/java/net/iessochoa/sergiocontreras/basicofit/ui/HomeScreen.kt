@@ -14,13 +14,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import net.iessochoa.sergiocontreras.basicofit.BasicoFitUiState
+import net.iessochoa.sergiocontreras.basicofit.data.Exercise
+import net.iessochoa.sergiocontreras.basicofit.data.Serie
 import net.iessochoa.sergiocontreras.basicofit.data.SessionStore
 import net.iessochoa.sergiocontreras.basicofit.data.formatKg
 import net.iessochoa.sergiocontreras.basicofit.ui.theme.BasicoFitTheme
 
 @Composable
 fun HomeScreen(
-    onExerciseClick: (String) -> Unit
+    uiState: BasicoFitUiState,
+    onExerciseClick: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Scaffold(
         bottomBar = {
@@ -36,7 +41,7 @@ fun HomeScreen(
         }
     ) { innerPadding ->
         Column(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxSize()
                 .padding(innerPadding)
                 .padding(16.dp),
@@ -44,6 +49,16 @@ fun HomeScreen(
         ) {
             Text("Básicos de hoy", style = MaterialTheme.typography.headlineSmall)
 
+            uiState.series.forEach { serie ->
+                val exerciseVolume = serie.peso * serie.repes
+                Button(
+                    onClick = { onExerciseClick(serie.exercise.name) },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("${serie.exercise.exerciseName} · ${exerciseVolume.formatKg()} kg")
+                }
+            }
+            /*
             SessionStore.exercises.forEach { exercise ->
                 Button(
                     onClick = { onExerciseClick(exercise.id) },
@@ -52,6 +67,7 @@ fun HomeScreen(
                     Text("${exercise.name} · ${SessionStore.volumeOf(exercise.id).formatKg()} kg")
                 }
             }
+            */
         }
     }
 }
@@ -59,7 +75,22 @@ fun HomeScreen(
 @Preview(showBackground=true)
 @Composable
 fun HomeScreenPreview() = BasicoFitTheme() {
+
+    val start: List<Serie> =
+        Exercise.entries.map {
+            Serie(
+                exercise = it,
+                repes = 5,
+                peso = 70.0
+            )
+        }
+
+    val previewState = BasicoFitUiState (start
+
+    )
+
     HomeScreen(
-        onExerciseClick = { }
+        onExerciseClick = { },
+        uiState = previewState
     )
 }
