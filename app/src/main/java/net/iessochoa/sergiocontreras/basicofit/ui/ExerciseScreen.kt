@@ -28,10 +28,13 @@ import net.iessochoa.sergiocontreras.basicofit.ui.theme.BasicoFitTheme
 
 @Composable
 fun ExerciseScreen(
-    exerciseId: String,
+    uiState: BasicoFitUiState,
     onBack: () -> Unit
 ) {
-    val exercise = SessionStore.exercises.first { it.id == exerciseId }
+
+    val exercise = uiState.selectedExercise
+    val serie = uiState.series.find { it.exercise == exercise}
+
 
     // Estado del formulario dentro del propio composable (stateful).
     var weightText by remember { mutableStateOf("") }
@@ -73,9 +76,8 @@ fun ExerciseScreen(
                 if (weight == null || reps == null || reps <= 0) {
                     error = "Revisa peso y repeticiones"
                 } else {
-                    SessionStore.sets.add(WorkSet(exercise.id, weight, reps))
-                    weightText = ""
-                    repsText = ""
+                    serie.peso = weight
+                    serie.repes = reps
                     error = null
                 }
             },

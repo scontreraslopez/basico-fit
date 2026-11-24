@@ -1,4 +1,4 @@
-package net.iessochoa.sergiocontreras.basicofit
+package net.iessochoa.sergiocontreras.basicofit.ui
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,6 +22,17 @@ class BasicoFitViewModel: ViewModel() {
         BasicoFitUiState(start)
     )
     val uiState: StateFlow<BasicoFitUiState> = _uiState.asStateFlow()
+
+    fun onActualizarValores(
+        weight: Double,
+        reps: Int
+    ) {
+        _uiState.update { currentState ->
+
+
+        }
+
+    }
 
 
 }

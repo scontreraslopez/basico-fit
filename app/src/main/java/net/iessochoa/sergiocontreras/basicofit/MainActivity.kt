@@ -12,10 +12,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            BasicoFitTheme {
-                // TODO: navegación pendiente (Navigation 3). Por ahora solo se muestra la pantalla principal.
-                HomeScreen(onExerciseClick = { })
-            }
+            BasicoFitApp()
         }
     }
 }

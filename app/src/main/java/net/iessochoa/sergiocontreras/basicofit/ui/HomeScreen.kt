@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import net.iessochoa.sergiocontreras.basicofit.BasicoFitUiState
 import net.iessochoa.sergiocontreras.basicofit.data.Exercise
 import net.iessochoa.sergiocontreras.basicofit.data.Serie
 import net.iessochoa.sergiocontreras.basicofit.data.SessionStore
