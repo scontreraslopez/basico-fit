@@ -1,5 +1,6 @@
 package net.iessochoa.sergiocontreras.basicofit.ui
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -58,6 +59,7 @@ class BasicoFitViewModel: ViewModel() {
         selectedExercise: Exercise
     ) {
         _uiState.update { currentState ->
+            //Log.d("DEBUG", "el selectedExercies es ${selectedExercise.exerciseName}")
             currentState.copy(
                 selectedExercise = selectedExercise
             )

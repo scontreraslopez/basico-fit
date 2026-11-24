@@ -1,5 +1,6 @@
 package net.iessochoa.sergiocontreras.basicofit.ui
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,13 +27,17 @@ fun HomeScreen(
     onExerciseClick: (Exercise) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val sessionVolume = uiState.series.sumOf {
+        it.repes*it.peso
+    }
     Scaffold(
+
         bottomBar = {
             Surface(tonalElevation = 3.dp, modifier = Modifier.fillMaxWidth()) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text("Volumen de la sesión", style = MaterialTheme.typography.labelLarge)
                     Text(
-                        "${SessionStore.totalVolume().formatKg()} kg",
+                        "${sessionVolume} kg",
                         style = MaterialTheme.typography.headlineMedium
                     )
                 }
@@ -51,7 +56,10 @@ fun HomeScreen(
             uiState.series.forEach { serie ->
                 val exerciseVolume = serie.peso * serie.repes
                 Button(
-                    onClick = { onExerciseClick(serie.exercise) },
+                    onClick = {
+                        //Log.d("DEBUG VIEW", serie.exercise.exerciseName)
+                        onExerciseClick(serie.exercise)
+                    },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text("${serie.exercise.exerciseName} · ${exerciseVolume.formatKg()} kg")
