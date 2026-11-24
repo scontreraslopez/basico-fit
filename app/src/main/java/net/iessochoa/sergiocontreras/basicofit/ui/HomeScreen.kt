@@ -23,7 +23,7 @@ import net.iessochoa.sergiocontreras.basicofit.ui.theme.BasicoFitTheme
 @Composable
 fun HomeScreen(
     uiState: BasicoFitUiState,
-    onExerciseClick: (String) -> Unit,
+    onExerciseClick: (Exercise) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
@@ -51,7 +51,7 @@ fun HomeScreen(
             uiState.series.forEach { serie ->
                 val exerciseVolume = serie.peso * serie.repes
                 Button(
-                    onClick = { onExerciseClick(serie.exercise.name) },
+                    onClick = { onExerciseClick(serie.exercise) },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text("${serie.exercise.exerciseName} · ${exerciseVolume.formatKg()} kg")

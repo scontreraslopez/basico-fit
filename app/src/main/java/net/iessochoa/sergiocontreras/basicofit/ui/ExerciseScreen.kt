@@ -29,7 +29,7 @@ import net.iessochoa.sergiocontreras.basicofit.ui.theme.BasicoFitTheme
 fun ExerciseScreen(
     uiState: BasicoFitUiState,
     onActualizarValores: (Double, Int) -> Unit,
-    onBack: () -> Unit
+    //onBack: () -> Unit
 ) {
 
     val exercise = uiState.selectedExercise
@@ -100,11 +100,12 @@ fun ExerciseScreen(
             "Volumen del ejercicio: ${SessionStore.volumeOf(exercise.id).formatKg()} kg",
             style = MaterialTheme.typography.titleSmall
         )
-        */
+
 
         OutlinedButton(onClick = onBack, modifier = Modifier.fillMaxWidth()) {
             Text("Volver")
         }
+        */
     }
 }
 
@@ -130,8 +131,5 @@ fun ExerciseScreenPreview() = BasicoFitTheme() {
     ExerciseScreen(
         uiState = previewState,
         onActualizarValores = { d, i -> }
-    ) {
-
-
-    }
+    )
 }

@@ -54,5 +54,17 @@ class BasicoFitViewModel: ViewModel() {
 
     }
 
+    fun onSelectExercise(
+        selectedExercise: Exercise
+    ) {
+        _uiState.update { currentState ->
+            currentState.copy(
+                selectedExercise = selectedExercise
+            )
+
+        }
+
+    }
+
 
 }
