@@ -29,11 +29,11 @@ import net.iessochoa.sergiocontreras.basicofit.ui.theme.BasicoFitTheme
 @Composable
 fun ExerciseScreen(
     uiState: BasicoFitUiState,
+    onActualizarValores: (Double, Int) -> Unit,
     onBack: () -> Unit
 ) {
 
     val exercise = uiState.selectedExercise
-    val serie = uiState.series.find { it.exercise == exercise}
 
 
     // Estado del formulario dentro del propio composable (stateful).
@@ -76,8 +76,7 @@ fun ExerciseScreen(
                 if (weight == null || reps == null || reps <= 0) {
                     error = "Revisa peso y repeticiones"
                 } else {
-                    serie.peso = weight
-                    serie.repes = reps
+                    onActualizarValores(weight, reps)
                     error = null
                 }
             },

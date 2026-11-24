@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import net.iessochoa.sergiocontreras.basicofit.data.Exercise
 import net.iessochoa.sergiocontreras.basicofit.data.Serie
 
@@ -27,8 +28,22 @@ class BasicoFitViewModel: ViewModel() {
         weight: Double,
         reps: Int
     ) {
-        _uiState.update { currentState ->
 
+        _uiState.update { currentState ->
+            val selectedExercise = currentState.selectedExercise
+            val selectedSerie = currentState.series.first { it.exercise == selectedExercise}
+
+            val updatedSerie = selectedSerie.copy(
+                repes = reps,
+                peso = weight
+            )
+
+            val seriesActualizadas = currentState.series - selectedSerie + updatedSerie
+
+
+            currentState.copy(
+                series = seriesActualizadas
+            )
 
         }
 
