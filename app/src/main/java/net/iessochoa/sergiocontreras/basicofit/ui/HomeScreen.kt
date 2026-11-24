@@ -84,8 +84,9 @@ fun HomeScreenPreview() = BasicoFitTheme() {
             )
         }
 
-    val previewState = BasicoFitUiState (start
-
+    val previewState = BasicoFitUiState(
+        series = start,
+        selectedExercise = start.first().exercise
     )
 
     HomeScreen(

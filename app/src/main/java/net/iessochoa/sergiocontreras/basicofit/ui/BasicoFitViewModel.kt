@@ -19,8 +19,13 @@ class BasicoFitViewModel: ViewModel() {
             )
         }
 
+    private val startExercise = start.first().exercise
+
     private val _uiState = MutableStateFlow(
-        BasicoFitUiState(start)
+        BasicoFitUiState(
+            series = start,
+            selectedExercise = startExercise
+        )
     )
     val uiState: StateFlow<BasicoFitUiState> = _uiState.asStateFlow()
 

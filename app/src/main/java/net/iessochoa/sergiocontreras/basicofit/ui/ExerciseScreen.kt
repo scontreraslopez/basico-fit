@@ -21,9 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import net.iessochoa.sergiocontreras.basicofit.data.SessionStore
-import net.iessochoa.sergiocontreras.basicofit.data.WorkSet
-import net.iessochoa.sergiocontreras.basicofit.data.formatKg
+import net.iessochoa.sergiocontreras.basicofit.data.Exercise
+import net.iessochoa.sergiocontreras.basicofit.data.Serie
 import net.iessochoa.sergiocontreras.basicofit.ui.theme.BasicoFitTheme
 
 @Composable
@@ -87,6 +86,7 @@ fun ExerciseScreen(
 
         HorizontalDivider()
 
+        /*
         Text("Series hechas", style = MaterialTheme.typography.titleMedium)
         val mySets = SessionStore.setsOf(exercise.id)
         if (mySets.isEmpty()) {
@@ -100,6 +100,7 @@ fun ExerciseScreen(
             "Volumen del ejercicio: ${SessionStore.volumeOf(exercise.id).formatKg()} kg",
             style = MaterialTheme.typography.titleSmall
         )
+        */
 
         OutlinedButton(onClick = onBack, modifier = Modifier.fillMaxWidth()) {
             Text("Volver")
@@ -110,7 +111,27 @@ fun ExerciseScreen(
 @Preview(showBackground=true)
 @Composable
 fun ExerciseScreenPreview() = BasicoFitTheme() {
+
+
+    val start: List<Serie> =
+        Exercise.entries.map {
+            Serie(
+                exercise = it,
+                repes = 5,
+                peso = 70.0
+            )
+        }
+
+    val previewState = BasicoFitUiState(
+        series = start,
+        selectedExercise = start.first().exercise
+    )
+
     ExerciseScreen(
-        exerciseId = "bench"
-    ) { }
+        uiState = previewState,
+        onActualizarValores = { d, i -> }
+    ) {
+
+
+    }
 }
